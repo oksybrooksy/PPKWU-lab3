@@ -1,7 +1,11 @@
-const express = require("express");
+import fetch from "node-fetch";
+// const fetch = require("node-fetch");
+import express from "express";
+// const express = require("express");
 const app = express();
-port = 3001;
-host = "localhost";
+const port = 3001;
+const host = "localhost";
+app.use(express.json());
 
 app.listen(port, host, (error) => {
   if (error) {
@@ -19,7 +23,7 @@ app.get("/format", async (req, res) => {
       const response = await fetch(
         `http://localhost:8080/CapitalLetters?text=${text}`
       );
-      const message = await response.json();
+      const message = await response.text();
       console.log(message);
     } catch (error) {
       console.error(error);
