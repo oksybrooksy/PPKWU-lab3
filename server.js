@@ -1,6 +1,9 @@
 import fetch from "node-fetch";
 // const fetch = require("node-fetch");
 import express from "express";
+import xml from "xml";
+// const xml = require("xml");
+
 // const express = require("express");
 const app = express();
 const port = 3001;
@@ -39,6 +42,8 @@ app.get("/format", async (req, res) => {
     if (format === "json") {
       return res.status(200).json({ message, message2, message3, message4 });
     } else if (format === "xml") {
+      res.set("Content-Type", "application/xml");
+      return res.status(200).send(xml(message4));
     } else if (format === "csv") {
     } else {
       return res.status(400).send("Incorrect format");
