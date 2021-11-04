@@ -41,7 +41,9 @@ app.get("/format", async (req, res) => {
       return res.status(200).json({ message, message2, message3, message4 });
     } else if (format === "xml") {
       res.set("Content-Type", "application/xml");
-      return res.status(200).send(xml(message4));
+      return res
+        .status(200)
+        .send(xml(`${message} \n ${message2} \n ${message3} \n ${message4}`));
     } else if (format === "csv") {
       const json2csv = new Parser();
       return res
