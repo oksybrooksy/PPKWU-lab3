@@ -18,34 +18,33 @@ app.listen(port, host, (error) => {
 app.get("/format", async (req, res) => {
   const format = req.query.format;
   const text = req.query.text;
-  if (format === "json") {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/CapitalLetters?text=${text}`
-      );
-      const response2 = await fetch(
-        `http://localhost:8080//lowercaseLetters?text=${text}`
-      );
-      const response3 = await fetch(
-        `http://localhost:8080/digits?text=${text}`
-      );
-      const response4 = await fetch(
-        `http://localhost:8080/specialCharacters?text=${text}`
-      );
 
-      const message = await response.text();
-      const message2 = await response2.text();
-      const message3 = await response3.text();
-      const message4 = await response4.text();
+  try {
+    const response = await fetch(
+      `http://localhost:8080/CapitalLetters?text=${text}`
+    );
+    const response2 = await fetch(
+      `http://localhost:8080//lowercaseLetters?text=${text}`
+    );
+    const response3 = await fetch(`http://localhost:8080/digits?text=${text}`);
+    const response4 = await fetch(
+      `http://localhost:8080/specialCharacters?text=${text}`
+    );
 
+    const message = await response.text();
+    const message2 = await response2.text();
+    const message3 = await response3.text();
+    const message4 = await response4.text();
+
+    if (format === "json") {
       return res.status(200).json({ message, message2, message3, message4 });
-    } catch (error) {
-      console.error(error);
+    } else if (format === "xml") {
+    } else if (format === "csv") {
+    } else {
+      return res.status(400).send("Incorrect format");
     }
-  } else if (format === "xml") {
-  } else if (format === "csv") {
-  } else {
-    return res.status(400).send("Incorrect format");
+  } catch (error) {
+    console.error(error);
   }
 
   return res.status(200).send("success");
