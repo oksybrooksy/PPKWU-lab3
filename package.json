@@ -19,6 +19,8 @@
   "homepage": "https://github.com/oksybrooksy/PPKWU-lab3#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "node-fetch": "^3.0.0"
+    "json2csv": "^5.0.6",
+    "node-fetch": "^3.0.0",
+    "xml": "^1.0.1"
   }
 }
