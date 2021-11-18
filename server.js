@@ -49,6 +49,10 @@ app.get("/format", async (req, res) => {
       return res
         .status(200)
         .send(json2csv.parse({ message, message2, message3, message4 }));
+    } else if (format === "txt") {
+      return res
+        .status(200)
+        .send(message + " " + message2 + " " + message3 + " " + message4);
     } else {
       return res.status(400).send("Incorrect format");
     }
